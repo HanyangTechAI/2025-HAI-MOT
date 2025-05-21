@@ -1,7 +1,13 @@
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from tqdm import tqdm
+import yaml
 from ultralytics.utils.downloads import download
+
+# Load the yaml configuration (defining class names and dataset paths)
+yaml_file = "VOC.yaml"  # Ensure this file exists with the correct format
+with open(yaml_file, 'r') as f:
+    yaml = yaml.safe_load(f)
 
 def convert_label(path, lb_path, year, image_id):
     """Converts XML annotations from VOC format to YOLO format by extracting bounding boxes and class IDs."""
@@ -29,15 +35,13 @@ def convert_label(path, lb_path, year, image_id):
 dir = Path(yaml["path"])  # dataset root dir
 url = "https://github.com/ultralytics/assets/releases/download/v0.0.0/"
 urls = [
-    f"{url}VOCtrainval_06-Nov-2007.zip",  # 446MB, 5012 images
-    f"{url}VOCtest_06-Nov-2007.zip",  # 438MB, 4953 images
     f"{url}VOCtrainval_11-May-2012.zip",  # 1.95GB, 17126 images
 ]
 download(urls, dir=dir / "images", curl=True, threads=3, exist_ok=True)  # download and unzip over existing (required)
 
 # Convert
 path = dir / "images/VOCdevkit"
-for year, image_set in ("2012", "train"), ("2012", "val"), ("2007", "train"), ("2007", "val"), ("2007", "test"):
+for year, image_set in ("2012", "train"), ("2012", "val"):
     imgs_path = dir / "images" / f"{image_set}{year}"
     lbs_path = dir / "labels" / f"{image_set}{year}"
     imgs_path.mkdir(exist_ok=True, parents=True)
