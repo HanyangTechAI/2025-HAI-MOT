@@ -14,4 +14,4 @@ metrics = model.val()
 results = model("./datasets/test_image.jpg")  # Predict on an image
 results[0].show()  
 
-# path = model.export(format="onnx")
+model.save("yolo11n-trained.pt")
