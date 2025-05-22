@@ -9,7 +9,7 @@ from ultralytics import YOLO
 model = YOLO("yolo11n.pt")
 
 # Open the video file
-video_path = "./data/test_video.mp4"
+video_path = "./datasets/test_video.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Store the track history
