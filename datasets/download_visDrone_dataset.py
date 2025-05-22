@@ -4,7 +4,7 @@ from pathlib import Path
 from ultralytics.utils.downloads import download
 
 # Load the yaml configuration (defining class names and dataset paths)
-yaml_file = "VisDrone.yaml"  # Ensure this file exists with the correct format
+yaml_file = "./datasets/VisDrone.yaml"  # Ensure this file exists with the correct format
 with open(yaml_file, 'r') as f:
     yaml = yaml.safe_load(f)
 
