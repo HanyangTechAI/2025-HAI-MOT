@@ -30,7 +30,7 @@ while cap.isOpened():
             track_ids = result.boxes.id.int().cpu().tolist()
 
             # Visualize the result on the frame
-            frame = result.plot()
+            frame = result.plot(conf=False, line_width=1)
 
             # Plot the tracks
             for box, track_id in zip(boxes, track_ids):
@@ -42,7 +42,7 @@ while cap.isOpened():
 
                 # Draw the tracking lines
                 points = np.hstack(track).astype(np.int32).reshape((-1, 1, 2))
-                cv2.polylines(frame, [points], isClosed=False, color=(230, 230, 230), thickness=10)
+                cv2.polylines(frame, [points], isClosed=False, color=(230, 230, 230), thickness=5)
 
         # Display the annotated frame
         cv2.imshow("YOLO11 Tracking", frame)
