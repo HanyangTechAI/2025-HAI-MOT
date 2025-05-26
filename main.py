@@ -6,10 +6,10 @@ import numpy as np
 from ultralytics import YOLO
 
 # Load the YOLO11 model
-model = YOLO("yolo11n.pt")
+model = YOLO("yolo11n-trained-100.pt")
 
 # Open the video file
-video_path = "./datasets/test_video.mp4"
+video_path = "./datasets/test_video_high_quality.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Store the track history
@@ -30,7 +30,7 @@ while cap.isOpened():
             track_ids = result.boxes.id.int().cpu().tolist()
 
             # Visualize the result on the frame
-            frame = result.plot()
+            frame = result.plot(conf=False, line_width=1)
 
             # Plot the tracks
             for box, track_id in zip(boxes, track_ids):
@@ -42,7 +42,7 @@ while cap.isOpened():
 
                 # Draw the tracking lines
                 points = np.hstack(track).astype(np.int32).reshape((-1, 1, 2))
-                cv2.polylines(frame, [points], isClosed=False, color=(230, 230, 230), thickness=10)
+                cv2.polylines(frame, [points], isClosed=False, color=(230, 230, 230), thickness=5)
 
         # Display the annotated frame
         cv2.imshow("YOLO11 Tracking", frame)
