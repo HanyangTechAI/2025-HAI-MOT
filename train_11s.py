@@ -3,7 +3,7 @@ from ultralytics import YOLO
 # YAML Configuration file
 data = "./datasets/VisDrone.yaml"
 
-model = YOLO("yolo11s.pt")
+model = YOLO("./weights/yolo11s.pt")
 print("\n-----------Validate Original Model-----------\n")
 metrics = model.val(data=data, plots=True)
 

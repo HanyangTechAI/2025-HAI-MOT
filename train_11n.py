@@ -4,7 +4,7 @@ from ultralytics import YOLO
 # data = "./datasets/VOC.yaml"
 data = "./datasets/VisDrone.yaml"
 
-model = YOLO("yolo11n.pt")
+model = YOLO("./weights/yolo11n.pt")
 print("\n-----------Validate Original Model-----------\n")
 metrics = model.val(data=data, plots=True)
 

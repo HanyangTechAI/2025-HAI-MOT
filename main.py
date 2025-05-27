@@ -6,7 +6,7 @@ import numpy as np
 from ultralytics import YOLO
 
 # Load the YOLO11 model
-model = YOLO("yolo11s-trained-100.pt")
+model = YOLO("./weights/yolo11s-trained-100.pt")
 
 # Open the video file
 video_path = "./datasets/test_video.mp4"
